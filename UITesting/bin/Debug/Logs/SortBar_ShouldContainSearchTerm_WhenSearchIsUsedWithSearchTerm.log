@@ -1,0 +1,44 @@
+2017-11-30 19:33:45.5688 INFO Starting test: SortBar_ShouldContainSearchTerm_WhenSearchIsUsedWithSearchTerm
+2017-11-30 19:33:45.6278 TRACE Starting: Set up AtataContext
+2017-11-30 19:33:45.6323 TRACE Set: BaseUrl=https://www.amazon.de/
+2017-11-30 19:33:45.6358 TRACE Set: RetryTimeout=5.000s; RetryInterval=0.500s
+2017-11-30 19:33:45.6393 TRACE Set: Culture=de-DE
+2017-11-30 19:33:48.1906 TRACE Set: Driver=ChromeDriver (alias=chrome)
+2017-11-30 19:33:48.1981 TRACE Finished: Set up AtataContext (2.570s)
+2017-11-30 19:33:48.2681 INFO Go to "Home" page
+2017-11-30 19:33:48.3416 INFO Go to URL "https://www.amazon.de/"
+2017-11-30 19:33:50.6276 INFO Starting: Set "ui testing" to "Search Bar" text input
+2017-11-30 19:33:52.9064 INFO Finished: Set "ui testing" to "Search Bar" text input (2.278s)
+2017-11-30 19:33:52.9159 INFO Starting: Click "Search" button
+2017-11-30 19:33:54.7788 INFO Finished: Click "Search" button (1.862s)
+2017-11-30 19:33:54.7978 INFO Starting: Verify "Sort Bar" search template's "Results Count" <h1> heading content should not be null
+2017-11-30 19:33:54.9603 INFO Finished: Verify "Sort Bar" search template's "Results Count" <h1> heading content should not be null (0.162s)
+2017-11-30 19:33:54.9683 INFO Starting: Verify "Sort Bar" search template's "Search Term" element content should contain "ui testing"
+2017-11-30 19:33:55.4425 INFO Finished: Verify "Sort Bar" search template's "Search Term" element content should contain "ui testing" (0.474s)
+2017-11-30 19:33:55.4650 ERROR Clean up action failure. Die Datei oder Assembly "nunit.framework" oder eine Abhängigkeit davon wurde nicht gefunden. The system cannot find the file specified.
+2017-11-30 19:33:55.4740 INFO Starting: Clean up test context
+2017-11-30 19:33:55.6400 INFO Finished: Clean up test context (0.165s)
+2017-11-30 19:33:55.6480 INFO Finished test (10.081s)
+2017-11-30 19:33:55.6560 INFO Pure test execution time:  7.271s
+2017-11-30 19:49:51.1710 INFO Starting test: SortBar_ShouldContainSearchTerm_WhenSearchIsUsedWithSearchTerm
+2017-11-30 19:49:51.2300 TRACE Starting: Set up AtataContext
+2017-11-30 19:49:51.2369 TRACE Set: BaseUrl=https://www.amazon.de/
+2017-11-30 19:49:51.2455 TRACE Set: RetryTimeout=5.000s; RetryInterval=0.500s
+2017-11-30 19:49:51.2539 TRACE Set: Culture=de-DE
+2017-11-30 19:49:53.7853 TRACE Set: Driver=ChromeDriver (alias=chrome)
+2017-11-30 19:49:53.7923 TRACE Finished: Set up AtataContext (2.562s)
+2017-11-30 19:49:53.8518 INFO Go to "Home" page
+2017-11-30 19:49:53.9323 INFO Go to URL "https://www.amazon.de/"
+2017-11-30 19:49:55.4718 INFO Starting: Set "ui testing" to "Search Bar" text input
+2017-11-30 19:49:55.6958 INFO Finished: Set "ui testing" to "Search Bar" text input (0.223s)
+2017-11-30 19:49:55.7013 INFO Starting: Click "Search" button
+2017-11-30 19:49:59.0886 INFO Finished: Click "Search" button (3.387s)
+2017-11-30 19:49:59.1066 INFO Starting: Verify "Sort Bar" search template's "Results Count" <h1> heading content should not be null
+2017-11-30 19:50:00.1201 INFO Finished: Verify "Sort Bar" search template's "Results Count" <h1> heading content should not be null (1.013s)
+2017-11-30 19:50:00.1266 INFO Starting: Verify "Sort Bar" search template's "Search Term" element content should contain "ui testing"
+2017-11-30 19:50:00.2196 INFO Finished: Verify "Sort Bar" search template's "Search Term" element content should contain "ui testing" (0.092s)
+2017-11-30 19:50:00.2421 ERROR Clean up action failure. Die Datei oder Assembly "nunit.framework" oder eine Abhängigkeit davon wurde nicht gefunden. The system cannot find the file specified.
+2017-11-30 19:50:00.2536 INFO Starting: Clean up test context
+2017-11-30 19:50:00.4156 INFO Finished: Clean up test context (0.161s)
+2017-11-30 19:50:00.4201 INFO Finished test (9.251s)
+2017-11-30 19:50:00.4241 INFO Pure test execution time:  6.457s
