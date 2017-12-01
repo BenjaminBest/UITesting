@@ -2,17 +2,17 @@ Automated UI Testing
 =====================================
 Before implementing and establishing automated UI tests in a project lots of questions should be answered.
 
-For the use case I'm testing for, these decicions were made
+For the use case I'm testing for, these decisions were made
 1. A "real" browser is needed, no emulation
 2. The [Selenium](https://github.com/SeleniumHQ/selenium) web driver should be used, cause a selenium grid is already in place
 3. A framework needed, because using Selenium will lead to messy and not maintainable code. The question is, if an existent one is good enough to work with quite a long time horizon. Also the framwork should not be dead when starting this project
-4. Which patterns should/can be used to develop maintainable code and supports quick creation of unit tests
+4. At least some patterns should be used to develop maintainable code and supports quick creation of unit tests
 5. MS Test should be used
-6. Are the UI tests stable and do not lead to lots of false positives
+6. The UI tests must be stable and should not lead to lots of false positives
 
-A VS test solution shall be created which uses [Atata Framework](https://atata-framework.github.io/). Then unit tests for [Amazon](https://www.amazon.de/) will be written to test the framework and the reliability of both, [Selenium](https://github.com/SeleniumHQ/selenium) and [Atata Framework](https://atata-framework.github.io/).
+The [Atata Framework](https://atata-framework.github.io/) sounds promising, so a VS test solution shall be created which uses [Atata Framework](https://atata-framework.github.io/). Then unit tests for [Amazon](https://www.amazon.de/) will be written to test the framework and the reliability of both, [Selenium](https://github.com/SeleniumHQ/selenium) and [Atata Framework](https://atata-framework.github.io/).
 
-This document contains a step by step guide of what was done.
+This document contains a step by step guide of what was done. The goal of this solution is that it is reproducible if it's worth it.
 
 Setup
 --------------
