@@ -1,4 +1,5 @@
 ﻿using Atata;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using UITesting.Pages;
@@ -7,7 +8,7 @@ using UITesting.TestsCore;
 namespace UITesting.Tests
 {
     /// <summary>
-    /// Uses controls, ordered list, screenshot, link and link delegate, attribute selector
+    /// Uses controls, link, fluent assertions and using selenium directly (https://github.com/atata-framework/atata-webdriverextras)
     /// </summary>
     /// <seealso cref="TestBase" />
     [TestClass]
@@ -17,12 +18,9 @@ namespace UITesting.Tests
         public void LanguageSwitch_ShouldBeVisible_WhenLanguageButtonWasClicked()
         {
             Go.To<HomePage>().Header.LanguageSwitch.Hover();
+            var element = AtataContext.Current.Driver.Get(By.Id("nav-flyout-icp").OfAnyVisibility().AtOnce());
 
-            //Manually using the driver, see https://github.com/atata-framework/atata-webdriverextras
-            var driver = AtataContext.Current.Driver;
-            var element = driver.Get(By.Id("nav-flyout-icp").OfAnyVisibility().AtOnce());
-
-            Assert.IsTrue(element.Displayed);
+            element.Displayed.Should().BeTrue();
         }
     }
 }

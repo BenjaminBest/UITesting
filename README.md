@@ -115,7 +115,7 @@ public class SearchBar<TPage> : Control<TPage> where TPage : PageObject<TPage>
     public Button<TPage> SearchButton { get; set; }
 }
 ```
-> ##### It seems that the control-definition attribute does not allow to find elements by ID
+> ##### It seems that the control-definition attribute does not allow to find elements by ID easily. Only the XPath selection is available. But localization of the control can be done in the page object where the control is used, not directly on the control definition.
 
 The actual unit tests looks like this:
 ```csharp
@@ -180,18 +180,20 @@ Go.To<HomePage>().CarouselTeaser.Next();
 Go.To<HomePage>().CarouselTeaser.Items.Items.Count.Should.Equal(7);
 ```
 
-#### Working directly with UI elements, hover
+#### Working directly with UI elements, hover & fluent assertions
 The [Atata Framework](https://atata-framework.github.io/) page objects and controls seems more useful when using interactive elements and they do not support querying html elements. It seems that an [extension package](https://github.com/atata-framework/atata-webdriverextras) can do the job, also it's possible to directly using selenium as a fallback.
+
+To also use `Should` for the selenium queries, the package [Fluent Assertions](http://fluentassertions.com/) have been installed.
 ```csharp
 Go.To<HomePage>().Header.LanguageSwitch.Hover();
 
 var driver = AtataContext.Current.Driver;
 var element = driver.Get(By.Id("nav-flyout-icp").OfAnyVisibility().AtOnce());
 
-Assert.IsTrue(element.Displayed);
+element.Displayed.Should().BeTrue();
 ```
 
-
+> ##### Using the driver directly undermines the page object strategy, so one should write custom extensions or derivations from `Atata.UIComponent` to encapsulate this
 
 ### Open questions
 1. How to get a screenshot from a specific UI component like a div
