@@ -61,21 +61,27 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="WebDriver, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.6.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.7.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.6.0\lib\net45\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.7.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Navigation\Header.cs" />
+    <Compile Include="Components\Search\SearchBar.cs" />
     <Compile Include="Components\Search\SortBar.cs" />
+    <Compile Include="Components\Teaser\CarouselWidget.cs" />
+    <Compile Include="Components\Teaser\CarouselWidgetItem.cs" />
     <Compile Include="Pages\CommonPage.cs" />
-    <Compile Include="TextInputTests.cs" />
+    <Compile Include="Tests\LanguageTests.cs" />
+    <Compile Include="Tests\SliderTests.cs" />
+    <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="TestsCore\Configuration.cs" />
     <Compile Include="TestsCore\TestBase.cs" />
-    <Compile Include="PageObjectTests.cs" />
+    <Compile Include="Tests\PageObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

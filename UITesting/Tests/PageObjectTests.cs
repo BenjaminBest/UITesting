@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UITesting.Pages;
 using UITesting.TestsCore;
 
-namespace UITesting
+namespace UITesting.Tests
 {
     [TestClass]
     public class PageObjectTests : TestBase

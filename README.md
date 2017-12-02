@@ -76,31 +76,24 @@ UI Tests
 Now some tests needs to be written to test how fast one can write tests with this framework, how stable is it and what happens when some test fails.
 
 ### Using the framework in unit tests
-#### Test the page title
+#### Navigation to the page represented by a page object
 ```csharp
-[TestMethod]
-public void Home_ShouldHaveCorrectTitle_WhenOpened()
-{
     Go.To<HomePage>().PageTitle.Should
         .Equal(
             "Amazon.de: Günstige Preise für Elektronik & Foto, Filme, Musik, Bücher, Games, Spielzeug & mehr");
-}
 ```
-#### A search input and buttons
-The home pageobject was extended by the search and sort bar. At amazon the sortbar is located directly below the search and contains the amount of results and the searchTerm.
+#### Page object with controls
+A page object can derive from other page obejcts and can contain controls to group features.
 ```csharp
-public class HomePage : Page<_>
+public class HomePage : CommonPage<_> {}
+
+public class CommonPage<TPage> : Page<TPage> where TPage : Page<TPage>
 {
-    [FindById("twotabsearchtextbox")]
-    public TextInput<_> SearchBar { get; set; }
-
-    [FindByClass("nav-input")]
-    public Button<_> SearchButton { get; set; }
-
-    public SortBar<_> SortBar { get; set; }
+    public SearchBar<TPage> SearchBar { get; set; }
+    public SortBar<TPage> SortBar { get; set; }
 }
 ```
-The sortbar is implemented as control which can contain multiple other UI components
+Controls which can contain multiple other UI components:
 ```csharp
 [ControlDefinition("div", ContainingClass = "searchTemplate", ComponentTypeName = "search template")]
 public class SortBar<TPage> : Control<TPage> where TPage : PageObject<TPage>
@@ -111,18 +104,24 @@ public class SortBar<TPage> : Control<TPage> where TPage : PageObject<TPage>
     [FindByClass("a-color-state a-text-bold")]
     public Text<TPage> SearchTerm { get; set; }
 }
+
+[ControlDefinition("form", ContainingClass = "nav-searchbar", ComponentTypeName = "nav searchbar")]
+public class SearchBar<TPage> : Control<TPage> where TPage : PageObject<TPage>
+{
+    [FindById("twotabsearchtextbox")]
+    public TextInput<TPage> SearchText { get; set; }
+
+    [FindByClass("nav-input")]
+    public Button<TPage> SearchButton { get; set; }
+}
 ```
+> ##### It seems that the control-definition attribute does not allow to find elements by ID
+
 The actual unit tests looks like this:
 ```csharp
-[TestMethod]
-public void SortBar_ShouldContainSearchTerm_WhenSearchIsUsedWithSearchTerm()
-{
-    const string searchTerm = "ui testing";
-
     Go.To<HomePage>().SearchBar.Set(searchTerm).SearchButton.Click()
     .SortBar.ResultsCount.Should.Not.BeNull()
     .SortBar.SearchTerm.Should.Contain(searchTerm);
-}
 ```
 #### Logging
 Because of the `AddNLogLogging()` in the test initialization and the nlog config log files are automatically generated.
@@ -154,3 +153,45 @@ The second file contains than this log:
 2017-11-30 19:33:55.6480 INFO Finished test (10.081s)
 2017-11-30 19:33:55.6560 INFO Pure test execution time:  7.271s
 ```
+
+#### Ordered Lists, screenshots, links and link delegates
+An ordered list can be tested using the classes _ListItem_ and _OrderedList_
+```csharp
+[FindByClass("a-carousel")]
+public OrderedList<CarouselWidgetItem<TPage>, TPage> Items { get; set; }
+
+public class CarouselWidgetItem<TPage> : ListItem<TPage> where TPage : PageObject<TPage> {}
+```
+
+A link delegate makes clicking easier, because the property itself is a function - no need to call Click(). When the Screenshot-attribute is used, a screenshot is automatically taken, even though the purpose of this is unclear (maybe for testing purposes during UI test development).
+```csharp
+[Screenshot("BeforeClick")]
+[Screenshot("AfterClick", TriggerEvents.AfterClick)]
+[FindByClass("a-carousel-goto-nextpage")]
+public LinkDelegate<TPage> Next { get; set; }
+
+///Can be used like this
+Go.To<HomePage>().CarouselTeaser.Next();
+```
+
+> ##### The ordered list can be accessed easily, but this test fill fail, despite the fact that there are seven not six list-items
+
+```csharp
+Go.To<HomePage>().CarouselTeaser.Items.Items.Count.Should.Equal(7);
+```
+
+#### Working directly with UI elements, hover
+The [Atata Framework](https://atata-framework.github.io/) page objects and controls seems more useful when using interactive elements and they do not support querying html elements. It seems that an [extension package](https://github.com/atata-framework/atata-webdriverextras) can do the job, also it's possible to directly using selenium as a fallback.
+```csharp
+Go.To<HomePage>().Header.LanguageSwitch.Hover();
+
+var driver = AtataContext.Current.Driver;
+var element = driver.Get(By.Id("nav-flyout-icp").OfAnyVisibility().AtOnce());
+
+Assert.IsTrue(element.Displayed);
+```
+
+
+
+### Open questions
+1. How to get a screenshot from a specific UI component like a div

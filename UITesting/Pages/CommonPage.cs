@@ -1,4 +1,5 @@
 ﻿using Atata;
+using UITesting.Components.Navigation;
 using UITesting.Components.Search;
 
 namespace UITesting.Pages
@@ -6,7 +7,7 @@ namespace UITesting.Pages
     /// <summary>
     /// Contains all ui elements which can be found on mostly every page
     /// </summary>
-    /// <seealso cref="Atata.Page{UITesting.Pages.HomePage}" />
+    /// <seealso cref="Atata.Page{HomePage}" />
     public class CommonPage<TPage> : Page<TPage> where TPage : Page<TPage>
     {
         /// <summary>
@@ -15,17 +16,7 @@ namespace UITesting.Pages
         /// <value>
         /// The search bar.
         /// </value>
-        [FindById("twotabsearchtextbox")]
-        public TextInput<TPage> SearchBar { get; set; }
-
-        /// <summary>
-        /// Gets or sets the search button.
-        /// </summary>
-        /// <value>
-        /// The search button.
-        /// </value>
-        [FindByClass("nav-input")]
-        public Button<TPage> SearchButton { get; set; }
+        public SearchBar<TPage> SearchBar { get; set; }
 
         /// <summary>
         /// Gets or sets the sort bar.
@@ -34,5 +25,8 @@ namespace UITesting.Pages
         /// The sort bar.
         /// </value>
         public SortBar<TPage> SortBar { get; set; }
+
+        [FindById("navbar")]
+        public Header<TPage> Header { get; set; }
     }
 }

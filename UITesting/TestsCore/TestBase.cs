@@ -9,8 +9,17 @@ namespace UITesting.TestsCore
     [TestClass]
     public class TestBase
     {
+        /// <summary>
+        /// Gets or sets the test context.
+        /// </summary>
+        /// <value>
+        /// The test context.
+        /// </value>
         public TestContext TestContext { get; set; }
 
+        /// <summary>
+        /// Initialize.
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -18,16 +27,18 @@ namespace UITesting.TestsCore
                 .UseChrome().WithArguments("disable-extensions", "no sandbox", "start-maximized")
                 .UseBaseUrl(Configuration.BaseUrl)
                 .UseTestName(TestContext.TestName)
-                //.UseNUnitTestName()
-                //.AddNUnitTestContextLogging().WithoutSectionFinish()
                 .AddNLogLogging()
                 .UseCulture("de-de")
                 .AddTraceLogging()
-                //.LogNUnitError()
-                .TakeScreenshotOnNUnitError()
+                .AddScreenshotFileSaving()
+                .WithFolderPath(() => $@"Logs\{AtataContext.BuildStart:yyyy-MM-dd HH_mm}")
+                .WithFileName(screenshotInfo => $"{AtataContext.Current.TestName} - {screenshotInfo.PageObjectFullName}")
                 .Build();
         }
 
+        /// <summary>
+        /// Cleanup.
+        /// </summary>
         [TestCleanup]
         public void TestCleanup()
         {
